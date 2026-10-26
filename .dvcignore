@@ -1,0 +1,13 @@
+# ─── DVC Ignore ───
+# Patterns to exclude from DVC tracking
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo

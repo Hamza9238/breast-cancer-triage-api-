@@ -1,0 +1,5 @@
+# Development / local tooling
+dvc==3.56.0
+dvc-s3==3.2.0
+pytest==8.3.4
+httpx==0.28.1

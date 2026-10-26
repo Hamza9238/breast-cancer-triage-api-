@@ -1,0 +1,34 @@
+# Ignore version control
+.git
+.dvc
+
+# Ignore Python artifacts
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+dist/
+build/
+
+# Ignore dev and docs files
+.env
+.env.example
+*.md
+requirements-dev.txt
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+.gitignore
+.dvcignore
+
+# Ignore DVC remote (data already restored via dvc pull before build)
+dvc-remote/
+
+# Ignore model artifacts (generated during build)
+artifacts/
+
+# Keep data/ for the training stage
+# Keep training/ for the training stage
+# Keep app/ for the serving stage
+# Keep params.yaml for training
+# Keep requirements-train.txt and requirements-serve.txt
