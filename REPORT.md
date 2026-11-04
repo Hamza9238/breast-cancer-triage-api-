@@ -1,4 +1,4 @@
-﻿# Breast Cancer Triage Service: Comprehensive MLOps Technical Report
+# Breast Cancer Triage Service: Comprehensive MLOps Technical Report
 
 **Course / Module**: MLOps Assignment 2  
 **System**: Containerized Medical Screening & Triage Microservice  
@@ -320,6 +320,24 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 ENTRYPOINT ["uvicorn", "app.main:app"]
 CMD ["--host", "0.0.0.0", "--port", "8000"]
 ```
+
+### 8.3 Live Docker Container Verification & Telemetry
+
+The production container was built, executed, and verified live on `http://localhost:8000`:
+```bash
+# Build multi-stage image with commit SHA
+docker build --build-arg MODEL_VERSION=1.0.0 --build-arg GIT_SHA=ce61db3 -t hamzayousaf1/breast-cancer-triage-api:1.0.0 .
+
+# Launch standalone container
+docker run -d -p 8000:8000 --name triage-api hamzayousaf1/breast-cancer-triage-api:1.0.0
+```
+
+- **Container Status**: `Up (healthy)` (passed internal Python liveness check).
+- **Microservice Endpoints**: Successfully processed `/health`, `/predict`, `/model/info`, and `/stats` with full JSON schemas.
+
+![Live Docker Container CLI Verification](screenshots/07_live_docker_cli_verification.png)
+
+![Live Container Swagger UI](screenshots/06_live_docker_container_swagger.png)
 
 ---
 
