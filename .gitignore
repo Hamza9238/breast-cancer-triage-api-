@@ -36,3 +36,7 @@ artifacts/
 
 # Data files (tracked by DVC)
 data/raw/breast_cancer.csv
+
+# Utility scripts
+generate_screenshots.py
+capture_docker_cli.py
