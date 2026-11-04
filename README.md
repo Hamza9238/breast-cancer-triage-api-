@@ -2,6 +2,8 @@
 
 A containerized ML service that classifies cell-nucleus measurements from fine needle aspirate samples as **malignant** or **benign**, helping pathologists prioritize their review queue.
 
+> **Full Assignment Report**: See [REPORT.md](REPORT.md) for the detailed technical report, cross-validation benchmarks, quality gate verification, and architecture screenshots.
+
 ## Repository Structure
 
 ```
@@ -48,8 +50,8 @@ breast-cancer-triage-service/
 ### 1. Clone and Restore Data
 
 ```bash
-git clone https://github.com/Hamza9238/Rice-Grain-Counter.git
-cd Rice-Grain-Counter
+git clone https://github.com/Hamza9238/breast-cancer-triage-api-.git
+cd breast-cancer-triage-api-
 
 # Install development dependencies
 pip install -r requirements-dev.txt

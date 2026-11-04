@@ -43,6 +43,7 @@ def build_pipelines(params):
                 max_iter=lr_params["max_iter"],
                 solver=lr_params["solver"],
                 random_state=params["seed"],
+                class_weight="balanced",
             )),
         ]),
         "RandomForest": Pipeline([
@@ -52,6 +53,7 @@ def build_pipelines(params):
                 max_depth=rf_params["max_depth"],
                 min_samples_split=rf_params["min_samples_split"],
                 random_state=params["seed"],
+                class_weight="balanced",
             )),
         ]),
     }
@@ -103,13 +105,15 @@ def evaluate_test(pipeline, X_test, y_test):
     y_pred = pipeline.predict(X_test)
     y_prob = pipeline.predict_proba(X_test)
 
-    # Malignant probability = probability of class 0
-    malignant_prob_col = list(pipeline.classes_).index(0)
+    # For ROC AUC in binary classification, sklearn needs P(positive_label).
+    # Since y_true uses {0, 1} and default positive_label=1, we pass P(class 1)
+    # which is the benign probability. The AUC is symmetric so this is correct.
+    benign_prob_col = list(pipeline.classes_).index(1)
 
     return {
         "test_recall_malignant": float(recall_score(y_test, y_pred, pos_label=0)),
         "test_accuracy": float(accuracy_score(y_test, y_pred)),
-        "test_roc_auc": float(roc_auc_score(y_test, y_prob[:, malignant_prob_col], labels=[0, 1])),
+        "test_roc_auc": float(roc_auc_score(y_test, y_prob[:, benign_prob_col])),
     }
 
 
